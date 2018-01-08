@@ -16,6 +16,8 @@ namespace EatingPet
         InputSimulator souris = new InputSimulator();
         UserInfo infoUser = new UserInfo();
         ConverterPixels convertpixel = new ConverterPixels();
+        int nbFamilier = 5;
+        int pos = 0;
 
         string cheminFichierMotDePasse;
         public MainWindow()
@@ -42,17 +44,29 @@ namespace EatingPet
             Thread.Sleep(200);
             souris.Mouse.LeftButtonClick();
             Thread.Sleep(300);
-            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1250), convertpixel.ConvertPixelX(790));
+            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1335), convertpixel.ConvertPixelX(809));
             Thread.Sleep(200);
             souris.Mouse.LeftButtonClick();
             Thread.Sleep(300);
-            SelectionFamilier("Chacha");
-            Thread.Sleep(300);
-            souris.Mouse.LeftButtonClick();
-            Thread.Sleep(300);
-            SelectionNouriture();
-            souris.Mouse.LeftButtonDoubleClick();
-            Thread.Sleep(300);
+            for (int i = 0; i < nbFamilier; i++)
+            {
+                SelectionFamilierFiveSecondeCase("Chacha", pos);
+                souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1500), convertpixel.ConvertPixelX(236));
+                Thread.Sleep(300);
+                souris.Mouse.LeftButtonClick();
+                Thread.Sleep(300);
+                SelectionNouriture();
+                souris.Mouse.LeftButtonDoubleClick();
+                Thread.Sleep(300);
+                pos = pos + 60;
+                if (nbFamilier > 5)
+                {
+
+                }
+            }
+
+
+
 
             //Thread.Sleep(300);
             //Thread.Sleep(300);
@@ -77,16 +91,35 @@ namespace EatingPet
             souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(733), convertpixel.ConvertPixelX(327));
             Thread.Sleep(300);
         }
-        private void SelectionFamilier(string familier)
+        private void SelectionFamilierFiveSecondeCase(string familier, int position)
         {
             souris.Keyboard.TextEntry(familier);
             Thread.Sleep(300);
-            //for( int i=0, i<Familier,i++)
-            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1192), convertpixel.ConvertPixelX(196));
+            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1300 + position), convertpixel.ConvertPixelX(200));
             Thread.Sleep(300);
             souris.Mouse.RightButtonClick();
             Thread.Sleep(300);
-            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1234), convertpixel.ConvertPixelX(238));
+
+        }
+        private void SelectionFamilierFiveThirdCase(string familier, int position)
+        {
+            souris.Keyboard.TextEntry(familier);
+            Thread.Sleep(300);
+            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1300 + position), convertpixel.ConvertPixelX(200));
+            Thread.Sleep(300);
+            souris.Mouse.RightButtonClick();
+            Thread.Sleep(300);
+
+        }
+        private void SelectionFamilierFiveFirstCase(string familier, int position)
+        {
+            souris.Keyboard.TextEntry(familier);
+            Thread.Sleep(300);
+            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1300 + position), convertpixel.ConvertPixelX(200));
+            Thread.Sleep(300);
+            souris.Mouse.RightButtonClick();
+            Thread.Sleep(300);
+
         }
     }
 }

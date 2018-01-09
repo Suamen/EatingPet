@@ -69,7 +69,7 @@ namespace EatingPet
 
                 if (i > 5)
                 {
-                    for (int j = 0; j < 5; j++)
+                    for (i; i <= 10; i++)
                     {
                         SelectionFamilierFiveSecondCase(pos2);
                         Thread.Sleep(500);

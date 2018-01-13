@@ -5,6 +5,8 @@ using System.Threading;
 using System.Windows;
 using WindowsInput;
 using EatingPet.Converter;
+using System;
+using System.Collections.Generic;
 
 namespace EatingPet
 {
@@ -16,20 +18,18 @@ namespace EatingPet
         InputSimulator souris = new InputSimulator();
         UserInfo infoUser = new UserInfo();
         ConverterPixels convertpixel = new ConverterPixels();
-        int nbFamilier = 10;
-        int pos = 0;
-        int pos2 = 0;
-        string familier = "Chacha";
+        string[] Familier5heures = { "ChaCha", "Bwork", "ChienChien" };
+        int[] NbFamilierParNom = { 5, 20, 12 };
 
-        string cheminFichierMotDePasse;
+        int posx = 1240;
+        int posy = 235;
+        int posxNouriture = 1300;
+        int posyNouriture = 270;
+
+        string cheminFichierMotDePasse = @"C:\Users\Pierre\Desktop\PasswordDofus.txt";
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
             Process.Start(@"C:\Users\Pierre\AppData\Local\Ankama\Dofus\app\Dofus.exe");//Chemin de l'application dofus sans le launcher. 
 
             Thread.Sleep(10000);
@@ -39,53 +39,87 @@ namespace EatingPet
             souris.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
             Thread.Sleep(2000);
             souris.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
-            Thread.Sleep(15000);
+            Thread.Sleep(20000);
             souris.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_I);
             Thread.Sleep(500);
-            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1290), convertpixel.ConvertPixelX(140));// Selection "tous" les object pour permetre de rechercher plus facilement les familiers.
+            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1240), convertpixel.ConvertPixelX(155));// Selection "tous" les object pour permetre de rechercher plus facilement les familiers.
             Thread.Sleep(200);
             souris.Mouse.LeftButtonClick();
             Thread.Sleep(500);
-            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1340), convertpixel.ConvertPixelX(809));// Selection la barre de recherche dans l'inventaire. 
-            Thread.Sleep(200);
-            souris.Mouse.LeftButtonClick();
-            Thread.Sleep(500);
-            souris.Keyboard.TextEntry(familier);
-            Thread.Sleep(500);
-            for (int i = 1; i <= nbFamilier; i++)
-            {
 
-                SelectionFamilierFiveFirstCase(pos);
-                Thread.Sleep(500);
-                souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1600), convertpixel.ConvertPixelX(240));// Selectionne la nourriture 
-                Thread.Sleep(500);
-                souris.Mouse.LeftButtonClick();
-                Thread.Sleep(500);
-                SelectionNouriture();
+            for (int z = 0; z < Familier5heures.Length; z++)
+            {
+                RechercheFamilier();
                 souris.Mouse.LeftButtonDoubleClick();
                 Thread.Sleep(500);
-                pos = pos + 60;
+                souris.Keyboard.TextEntry(Familier5heures[z]);
+                Thread.Sleep(500);
 
-
-                if (i > 5)
+                for (int i = 0; i < NombreDeLignes(NbFamilierParNom[z]); i++)
                 {
-                    for (int j = 0; j < 5; j++)
+
+                    for (int j = 0; j < 5 && i * 5 + j < NbFamilierParNom[z]; j++)
                     {
-                        SelectionFamilierFiveSecondCase(pos2);
+                        Nourrir(posx, posy, posxNouriture, posyNouriture);
+
+                        posx += 60;
+                        posxNouriture += 60;
                         Thread.Sleep(500);
-                        souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1610), convertpixel.ConvertPixelX(317));// Selectionne la nourriture 
-                        Thread.Sleep(500);
-                        souris.Mouse.LeftButtonClick();
-                        Thread.Sleep(500);
-                        SelectionNouriture();
-                        souris.Mouse.LeftButtonDoubleClick();
-                        Thread.Sleep(500);
-                        pos2 = pos2 + 60;
                     }
+                    posx -= 300;
+                    posxNouriture -= 300;
+
+                    posy += 60;
+                    posyNouriture += 60;
 
                 }
-            }
 
+                posx = 1240;
+                posy = 235;
+                posxNouriture = 1300;
+                posyNouriture = 270;
+
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+
+        }
+
+        private void RechercheFamilier()
+        {
+            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1290), convertpixel.ConvertPixelX(830));// Selection la barre de recherche dans l'inventaire. 
+            Thread.Sleep(200);
+        }
+
+        public void Nourrir(int posX, int posY, int posXNouriture, int posYNouriture)
+        {
+            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(posX), convertpixel.ConvertPixelX(posY));
+            Thread.Sleep(500);
+            souris.Mouse.RightButtonClick();
+            Thread.Sleep(500);
+            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(posXNouriture), convertpixel.ConvertPixelX(posYNouriture));
+            Thread.Sleep(500);
+            souris.Mouse.LeftButtonClick();
+            Thread.Sleep(500);
+            SelectionNouriture();
+            souris.Mouse.LeftButtonDoubleClick();
+            Thread.Sleep(500);
+        }
+        private void SelectionNouriture()
+        {
+            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(730), convertpixel.ConvertPixelX(330));
+            Thread.Sleep(500);
+        }
+
+        public decimal NombreDeLignes(int nbFamilier)
+        {
+            decimal floatNbFamilier = nbFamilier / 5;
+            return Math.Ceiling(floatNbFamilier);
         }
 
         private void ButtonPasseWord_Click(object sender, RoutedEventArgs e)
@@ -96,28 +130,10 @@ namespace EatingPet
 
             cheminFichierMotDePasse = openFileDialog.FileName;
         }
-        private void SelectionNouriture()
-        {
-            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(733), convertpixel.ConvertPixelX(327));
-            Thread.Sleep(500);
-        }
-        private void SelectionFamilierFiveFirstCase(int position)
-        {
-            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1285 + position), convertpixel.ConvertPixelX(210));// Position du pet 
-            Thread.Sleep(500);
-            souris.Mouse.RightButtonClick();
-            Thread.Sleep(500);
-
-        }
-        private void SelectionFamilierFiveSecondCase(int position)
-        {
-
-            souris.Mouse.MoveMouseTo(convertpixel.ConvertPixelY(1285 + position), convertpixel.ConvertPixelX(270));// Position du pet
-            Thread.Sleep(500);
-            souris.Mouse.RightButtonClick();
-            Thread.Sleep(500);
-
-        }
 
     }
+
+
+
 }
+

@@ -60,22 +60,19 @@ namespace EatingPet
 
 
                     for (int j = 0; j < 5 && i * 5 + j < NbFamilierParNom[z]; j++)
+                    {
 
-                        for (i; i <= 10; i++)
+                        Nourrir(posx, posy, posxNouriture, posyNouriture);
 
-                        {
-                            Nourrir(posx, posy, posxNouriture, posyNouriture);
-
-                            posx += 60;
-                            posxNouriture += 60;
-                            Thread.Sleep(500);
-                        }
+                        posx += 60;
+                        posxNouriture += 60;
+                        Thread.Sleep(500);
+                    }
                     posx -= 300;
                     posxNouriture -= 300;
 
                     posy += 60;
                     posyNouriture += 60;
-
                 }
 
                 posx = 1240;

@@ -57,8 +57,12 @@ namespace EatingPet
 
                 for (int i = 0; i < NombreDeLignes(NbFamilierParNom[z]); i++)
                 {
+<<<<<<< HEAD
 
                     for (int j = 0; j < 5 && i * 5 + j < NbFamilierParNom[z]; j++)
+=======
+                    for (i; i <= 10; i++)
+>>>>>>> 900669b3f164afd939d4bd304d217cae850dbe8b
                     {
                         Nourrir(posx, posy, posxNouriture, posyNouriture);
 

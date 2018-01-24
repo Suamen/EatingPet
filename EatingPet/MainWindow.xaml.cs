@@ -31,14 +31,15 @@ namespace EatingPet
         int posxNouriture = 1350;
         int posyNouriture = 250;
         int nbBoucle = 0;
+		int nourritureFamilier;
 
         string cheminFichierMotDePasse = @"C:\Users\Pierre\Desktop\PasswordDofus.txt";
+		string cheminDofus = empty;
 
         public MainWindow()
         {
             var nbRandom = deplacementClick.Next(500, 1500);
 
-            FamilierDe5Heures.Add("ChaCha" + "Bwork" + "ChienChien");
             InitializeComponent();
             Process NourrirePet = Process.Start(@"C:\Users\Pierre\AppData\Local\Ankama\Dofus\app\Dofus.exe");//Chemin de l'application dofus sans le launcher. 
 
@@ -91,10 +92,10 @@ namespace EatingPet
                 posxNouriture = 1350;
                 posyNouriture = 250;
 
-                if (Familier5heures[z] == Familier5heures.Length.ToString())
+                if (Familier5heures[z].lengh == Familier5heures.lengh))
                 {
-                    NourrirePet.Kill();
-                    Exit();
+					Thread.Sleep(1000);
+                    souris.Keyboard.KeyPress((WindowsInput.Native.VirtualKeyCode.VK_MENU) + (WindowsInput.Native.VirtualKeyCode.VK_F4) );
                 }
                 else
                 {
@@ -106,7 +107,7 @@ namespace EatingPet
 
         private void Exit()
         {
-            throw new NotImplementedException();
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -158,10 +159,18 @@ namespace EatingPet
 
             cheminFichierMotDePasse = openFileDialog.FileName;
         }
+		private void ButtonPasseWord_Click2(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Text files (*.txt)|*.txt";
+            openFileDialog.ShowDialog();
+
+            cheminDofus = openFileDialog.FileName;
+        }
+        
 
     }
 
 
 
 }
-

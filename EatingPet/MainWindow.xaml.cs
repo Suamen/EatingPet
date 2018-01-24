@@ -7,6 +7,8 @@ using WindowsInput;
 using EatingPet.Converter;
 using System;
 using System.Collections.Generic;
+using WPFNotification.Services;
+using WPFNotification.Model;
 
 namespace EatingPet
 {
@@ -23,12 +25,13 @@ namespace EatingPet
         int[] NbFamilierParNom = { 10, 25, 15 };
         Random deplacementClick = new Random();
 
+
         int posx = 1270;
         int posy = 215;
         int posxNouriture = 1350;
         int posyNouriture = 250;
         int nbBoucle = 0;
-        int nourritureFamilier;
+        int nourritureFamilier = 10;
 
         string cheminFichierMotDePasse = @"C:\Users\Pierre\Desktop\PasswordDofus.txt";
         string cheminDofus;
@@ -39,11 +42,12 @@ namespace EatingPet
 
             InitializeComponent();
             Process NourrirePet = Process.Start(@"C:\Users\Pierre\AppData\Local\Ankama\Dofus\app\Dofus.exe");//Chemin de l'application dofus sans le launcher. 
-
+            INotificationDialogService notificationNourritureFamilier = new NotificationDialogService();
             Thread.Sleep(10000);
             souris.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
-            souris.Keyboard.TextEntry(infoUser.Fichier(cheminFichierMotDePasse)); // Mot de passe
-            Thread.Sleep(2000);
+            Thread.Sleep(nbRandom);
+            souris.Keyboard.TextEntry(infoUser.Fichier(cheminFichierMotDePasse)); // mot de passe
+            Thread.Sleep(5000);
             souris.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
             Thread.Sleep(2000);
             souris.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
@@ -89,14 +93,23 @@ namespace EatingPet
                 posyNouriture = 250;
 
             }
-
+            for (int i = 0; i < NbFamilierParNom.Length; i++)
+            {
+                if ((NbFamilierParNom[i] * 4) < 10)
+                {
+                    Notification.Program.Main();
+                }
+            }
             QuitterApplication();
+
+            NourrirePet.Kill();
+
 
         }
         private void QuitterApplication()
         {
-            Thread.Sleep(1000);
             souris.Keyboard.ModifiedKeyStroke(WindowsInput.Native.VirtualKeyCode.MENU, WindowsInput.Native.VirtualKeyCode.F4);
+            Thread.Sleep(500);
         }
 
         private void RechercheFamilier()

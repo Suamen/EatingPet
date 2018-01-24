@@ -49,6 +49,8 @@ namespace EatingPet
             souris.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
             Thread.Sleep(2000);
             souris.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
+            Thread.Sleep(2000);
+            souris.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.RETURN);
             Thread.Sleep(20000);
             souris.Keyboard.KeyPress(WindowsInput.Native.VirtualKeyCode.VK_I);
             Thread.Sleep(nbRandom);

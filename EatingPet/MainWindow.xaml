@@ -7,16 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="353,203,0,0" VerticalAlignment="Top" Width="98" RenderTransformOrigin="0.5,0.5" Height="50" Click="Button_Click">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="1.759"/>
-                    <RotateTransform Angle="-1.842"/>
-                    <TranslateTransform X="0.048" Y="1.504"/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
         <Label Content="Label" HorizontalAlignment="Left" Margin="47,-67,0,0" VerticalAlignment="Top"/>
         <Button x:Name="ButtonPasseWord" Content="PasseWordSelecedFile" HorizontalAlignment="Left" Margin="64,83,0,0" VerticalAlignment="Top" Width="75" Click="ButtonPasseWord_Click"/>
 

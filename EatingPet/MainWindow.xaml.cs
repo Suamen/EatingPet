@@ -23,18 +23,15 @@ namespace EatingPet
         int[] NbFamilierParNom = { 10, 25, 15 };
         Random deplacementClick = new Random();
 
-
-
-
         int posx = 1270;
         int posy = 215;
         int posxNouriture = 1350;
         int posyNouriture = 250;
         int nbBoucle = 0;
-		int nourritureFamilier;
+        int nourritureFamilier;
 
         string cheminFichierMotDePasse = @"C:\Users\Pierre\Desktop\PasswordDofus.txt";
-		string cheminDofus = empty;
+        string cheminDofus;
 
         public MainWindow()
         {
@@ -72,7 +69,6 @@ namespace EatingPet
 
                     for (int j = 0; j < 5 && i * 5 + j < NbFamilierParNom[z]; j++)
                     {
-
                         Nourrir(posx, posy, posxNouriture, posyNouriture);
 
                         posx += 60;
@@ -92,28 +88,15 @@ namespace EatingPet
                 posxNouriture = 1350;
                 posyNouriture = 250;
 
-                if (Familier5heures[z].lengh == Familier5heures.lengh))
-                {
-					Thread.Sleep(1000);
-                    souris.Keyboard.KeyPress((WindowsInput.Native.VirtualKeyCode.VK_MENU) + (WindowsInput.Native.VirtualKeyCode.VK_F4) );
-                }
-                else
-                {
-                    continue;
-                }
             }
 
+            QuitterApplication();
+
         }
-
-        private void Exit()
+        private void QuitterApplication()
         {
-           
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-
+            Thread.Sleep(1000);
+            souris.Keyboard.ModifiedKeyStroke(WindowsInput.Native.VirtualKeyCode.MENU, WindowsInput.Native.VirtualKeyCode.F4);
         }
 
         private void RechercheFamilier()
@@ -159,7 +142,7 @@ namespace EatingPet
 
             cheminFichierMotDePasse = openFileDialog.FileName;
         }
-		private void ButtonPasseWord_Click2(object sender, RoutedEventArgs e)
+        private void ButtonPasseWord_Click2(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Text files (*.txt)|*.txt";
@@ -167,10 +150,13 @@ namespace EatingPet
 
             cheminDofus = openFileDialog.FileName;
         }
-        
 
     }
 
 
 
 }
+
+
+
+
